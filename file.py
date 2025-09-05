@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import os
 import logging
 import tempfile
@@ -21,21 +22,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Your bot token from BotFather
-TOKEN = "8446506316:AAEw2EILjQqj4mT4PNygZPEZRw950ovhfIU"
+# Load .env file
+load_dotenv()
 
-# Your channel username (without @)
-CHANNEL_USERNAME = "GBEXTREME"
+# Telegram Bot
+TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
+CREATOR_USERNAME = os.getenv("CREATOR_USERNAME")
+ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID"))
 
-# Your creator username
-CREATOR_USERNAME = "@wipro_x"
+# Telethon
+API_ID = int(os.getenv("API_ID"))
+API_HASH = os.getenv("API_HASH")
 
-# Your personal chat ID for notifications (NOT a bot ID)
-ADMIN_CHAT_ID = "-1003016985569"
-
-# Telegram API credentials (from https://my.telegram.org/apps)
-API_ID = "23323985"
-API_HASH = "d24809282e7c046a98a04ca3c66659e7"
+# Google Drive
+CREDENTIALS_FILE = os.getenv("CREDENTIALS_FILE")
 
 # Google Drive API scope
 SCOPES = ['https://www.googleapis.com/auth/drive']
