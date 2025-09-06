@@ -4,6 +4,8 @@ import logging
 import tempfile
 import pickle
 import requests
+import threading
+from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 from google.auth.transport.requests import Request
@@ -492,5 +494,14 @@ def main():
     # Start the Bot
     application.run_polling()
 
-if __name__ == '__main__':
-    main()
+flask_app = Flask(__name__)
+
+@flask_app.route("/")
+def home():
+    return "Bot is alive!"  # UptimeRobot expects any 200 OK response
+
+if __name__ == "__main__":
+    # Run Telegram bot in a background thread
+    threading.Thread(target=run_bot).start()
+    # Start Flask server on main thread
+    flask_app.run(host="0.0.0.0", port=8080)
