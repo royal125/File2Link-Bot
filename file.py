@@ -484,6 +484,7 @@ def main():
     application = Application.builder().token(TOKEN).build()
 
     # Add handlers
+    def run_bot():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("myid", get_my_id))
